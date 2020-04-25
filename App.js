@@ -12,9 +12,9 @@ export default function App() {
   return (
     <NavigationContainer style={styles.nav}>
       <Stack.Navigator
-        // screenOptions={{
-        //   headerShown: false
-        // }}
+        screenOptions={{
+          headerShown: false
+        }}
         >
         <Stack.Screen name="Search" component={Search} />
         <Stack.Screen name="NewsList" component={NewsList} />

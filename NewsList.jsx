@@ -50,7 +50,6 @@ class NewsList extends Component {
   }
 
   renderViewMoreButton = () => {
-    //if currentpage = pages, dont render this button
     const { currentPage, pages } = this.state;
 
     if (currentPage !== pages) {

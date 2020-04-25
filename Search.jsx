@@ -15,7 +15,6 @@ import { formatDate } from "./utils";
 class Search extends Component {
   state = {
     q: null,
-    starRating: null,
     DateFrom: "",
     DateTo: "",
     showDateFromPicker: false,
@@ -28,7 +27,8 @@ class Search extends Component {
       showDateToPicker,
       showDateFromPicker,
       DateFrom,
-      DateTo
+      DateTo,
+      q
     } = this.state;
 
     return (
@@ -38,6 +38,7 @@ class Search extends Component {
           <TextInput
             style={styles.text}
             placeholder="Search"
+            value={q}
             onChangeText={input => this.handleInput(input, "q")}
           />
           <TextInput
@@ -102,7 +103,7 @@ class Search extends Component {
 
   handleSearchPress = () => {
     const { q, DateFrom, DateTo } = this.state;
-
+    this.setState({ q: "", DateFrom: "", DateTo: "" });
     this.props.navigation.navigate("NewsList", { q, DateFrom, DateTo });
   };
 }
