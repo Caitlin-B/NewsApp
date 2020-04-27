@@ -1,21 +1,17 @@
 import moment from 'moment';
 
-export function formatDate(dateString) {
+export function formatDate(dateString, length) {
   const parsed = moment(new Date(dateString));
 
   if (!parsed.isValid()) {
     return dateString;
   }
+  
+  if(length === "short") {
+    return parsed.format('D MMM YYYY');
+  } 
 
-  return parsed.format('D MMM YYYY');
-}
-
-export function formatDateFull(dateString) {
-  const parsed = moment(new Date(dateString));
-
-  if (!parsed.isValid()) {
-    return dateString;
+  if(length === "long") {
+    return parsed.format('Do MMMM YYYY')
   }
-
-  return parsed.format('Do MMMM YYYY');
 }

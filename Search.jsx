@@ -55,7 +55,7 @@ class Search extends Component {
           <TextInput
             style={[styles.text, styles.borderTop]}
             placeholder="From date"
-            value={DateFrom && formatDate(DateFrom.toString())}
+            value={DateFrom && formatDate(DateFrom.toString(), 'short')}
             editable={!showDateFromPicker}
             onFocus={() => {
               this.handleDatePress("DateFrom");
@@ -70,7 +70,7 @@ class Search extends Component {
           <TextInput
             style={[styles.text, styles.borderTop]}
             placeholder="To date"
-            value={DateTo && formatDate(DateTo.toString())}
+            value={DateTo && formatDate(DateTo.toString(), 'short')}
             editable={!showDateToPicker}
             onFocus={() => {
               this.handleDatePress("DateTo");

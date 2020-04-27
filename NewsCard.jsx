@@ -1,14 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
 import { Linking } from "expo";
-import { formatDateFull } from "./utils";
+import { formatDate } from "./utils";
 
 const NewsCard = ({ article }) => {
   return (
     <View style={styles.cardContainer}>
       <Text style={styles.titleText}>{article.webTitle}</Text>
       <Text>
-        {article.sectionName} • {formatDateFull(article.webPublicationDate)}
+        {article.sectionName} • {formatDate(article.webPublicationDate, 'long')}
       </Text>
       <TouchableHighlight
         onPress={() => {
