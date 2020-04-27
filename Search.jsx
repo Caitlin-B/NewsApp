@@ -19,7 +19,8 @@ class Search extends Component {
     DateTo: null,
     showDateFromPicker: false,
     showDateToPicker: false,
-    qError: false
+    qError: false,
+    showHelp: false
   };
 
   render() {
@@ -29,12 +30,14 @@ class Search extends Component {
       showDateFromPicker,
       DateFrom,
       DateTo,
-      q
+      q,
+      showHelp
     } = this.state;
 
     return (
       <View>
         <Header navigation={navigation} />
+
         <View style={styles.fieldContainer}>
           <TextInput
             style={styles.text}
@@ -43,8 +46,10 @@ class Search extends Component {
             onChangeText={input => this.handleInput(input, "q")}
           />
           {!!this.state.qError && (
-          <Text style={{ color: "red", marginLeft: 20 }}>{this.state.qError}</Text>
-        )}
+            <Text style={{ color: "red", marginLeft: 20 }}>
+              {this.state.qError}
+            </Text>
+          )}
           <TextInput
             style={[styles.text, styles.borderTop]}
             placeholder="From date"
@@ -80,6 +85,21 @@ class Search extends Component {
             style={styles.button}>
             <Text style={styles.buttonText}>Search</Text>
           </TouchableHighlight>
+          <View style={styles.infoContainer}>
+            {showHelp === true ? (
+              <Text style={styles.infoText}>
+                Start searching the news by entering a search term. Narrow down
+                your search by searching between specific dates.
+              </Text>
+            ) : (
+              <TouchableHighlight
+                onPress={() => {
+                  this.setState({ showHelp: true });
+                }}>
+                <Text style={styles.infoText}>Help</Text>
+              </TouchableHighlight>
+            )}
+          </View>
         </View>
       </View>
     );
@@ -114,16 +134,18 @@ class Search extends Component {
       this.setState({ q: "", DateFrom: null, DateTo: null, qError: false });
       this.props.navigation.navigate("NewsList", { q, DateFrom, DateTo });
     }
-
   };
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
+  infoContainer: {
     alignItems: "center",
-    justifyContent: "center"
+    margin: 15
+  },
+  infoText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#F15025"
   },
   fieldContainer: {
     marginTop: 20,

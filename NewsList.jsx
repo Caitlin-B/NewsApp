@@ -24,20 +24,33 @@ class NewsList extends Component {
     const { navigation } = this.props;
 
     return (
-      <View style={styles.container}>
+      <View style={{ flex: 1 }}>
         <Header navigation={navigation} />
-
         {status === "loading" ? (
-          <Text>loading...</Text>
+          <View style={styles.container}>
+            <Text style={styles.startText}>loading...</Text>
+          </View>
         ) : results.length === 0 ? (
-          <Text>No results found</Text>
+          <View style={styles.container}>
+            <Text style={styles.startText}>No results found</Text>
+          </View>
         ) : (
-          
-          <FlatList
-            data={results}
-            renderItem={({ item }) => <NewsCard article={item} />}
-            ListFooterComponent={this.renderViewMoreButton}
-          />
+          <View style={{ flex: 1 }}>
+            <View style={styles.options}>
+            <Text>{total} results</Text>
+            <TouchableHighlight
+              onPress={() => {
+                navigation.navigate("Search");
+              }}>
+              <Text style={styles.searchAgain}>Search again?</Text>
+            </TouchableHighlight>
+            </View>
+            <FlatList
+              data={results}
+              renderItem={({ item }) => <NewsCard article={item} />}
+              ListFooterComponent={this.renderViewMoreButton}
+            />
+          </View>
         )}
       </View>
     );
@@ -62,7 +75,7 @@ class NewsList extends Component {
           <TouchableHighlight
             onPress={this.handleViewMorePress}
             style={styles.button}>
-            <Text style={styles.buttonText}>See More</Text>
+            <Text style={styles.seeMoreButtonText}>See More</Text>
           </TouchableHighlight>
         </View>
       );
@@ -98,8 +111,12 @@ class NewsList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
+    // backgroundColor: "#E6E8E6",
+    alignItems: "center"
+  },
+  options: {
+    flexDirection: "row",
+    justifyContent: "space-around"
   },
   button: {
     height: 50,
@@ -114,6 +131,21 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontSize: 18
+  },
+  seeMoreButtonText: {
+    color: "#F15025",
+    fontSize: 18
+  },
+  startText: {
+    justifyContent: "center"
+  },
+  searchAgain: {
+    // backgroundColor: "#F15025",
+    // borderColor: "#F15025",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 5,
+    color: "#F15025"
   },
   endText: {
     color: "#CED0CE",
