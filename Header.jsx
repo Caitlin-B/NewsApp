@@ -15,11 +15,9 @@ const Header = ({ navigation }) => {
         onPress={() => {
           navigation.navigate("Search");
         }}>
-          <View style={styles.header}>
-        <Text style={styles.headerMainText}>
-          NEWS 
-        </Text>
-        <Image style={styles.searchIcon} source={searchIcon} />
+        <View style={styles.header}>
+          <Text style={styles.headerMainText}>NEWS</Text>
+          <Image style={styles.searchIcon} source={searchIcon} />
         </View>
       </TouchableHighlight>
     </View>
@@ -31,13 +29,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#CED0CE",
     flexDirection: "row",
     width: "100%",
-    //justifyContent: "space-between",
     alignItems: "center",
     paddingTop: 20
-    //borderBottomWidth: 5
   },
   headerMainText: {
-    // marginTop: "3%",
     marginLeft: "3%",
     fontFamily: "American Typewriter",
     fontSize: 50,

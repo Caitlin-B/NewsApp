@@ -31,19 +31,25 @@ class NewsList extends Component {
             <Text style={styles.startText}>loading...</Text>
           </View>
         ) : results.length === 0 ? (
-          <View style={styles.container}>
-            <Text style={styles.startText}>No results found</Text>
-          </View>
-        ) : (
-          <View style={{ flex: 1 }}>
-            <View style={styles.options}>
-            <Text>{total} results</Text>
+          <View style={styles.options}>
+            <Text style={styles.total}>No results</Text>
             <TouchableHighlight
               onPress={() => {
                 navigation.navigate("Search");
               }}>
-              <Text style={styles.searchAgain}>Search again?</Text>
+              <Text style={styles.searchAgain}>New Search</Text>
             </TouchableHighlight>
+          </View>
+        ) : (
+          <View style={{ flex: 1 }}>
+            <View style={styles.options}>
+              <Text style={styles.total}>{total} results</Text>
+              <TouchableHighlight
+                onPress={() => {
+                  navigation.navigate("Search");
+                }}>
+                <Text style={styles.searchAgain}>New Search</Text>
+              </TouchableHighlight>
             </View>
             <FlatList
               data={results}
@@ -111,12 +117,12 @@ class NewsList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "#E6E8E6",
     alignItems: "center"
   },
   options: {
     flexDirection: "row",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
+    marginTop: 3
   },
   button: {
     height: 50,
@@ -137,15 +143,18 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   startText: {
-    justifyContent: "center"
+    justifyContent: "center",
+    fontWeight: "bold"
   },
   searchAgain: {
-    // backgroundColor: "#F15025",
-    // borderColor: "#F15025",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 5,
-    color: "#F15025"
+    color: "#F15025",
+    fontWeight: "bold"
+  },
+  total: {
+    fontWeight: "bold"
   },
   endText: {
     color: "#CED0CE",

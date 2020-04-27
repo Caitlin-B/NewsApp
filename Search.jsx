@@ -4,8 +4,6 @@ import {
   Text,
   View,
   TextInput,
-  Button,
-  Picker,
   TouchableHighlight
 } from "react-native";
 import DateTimePicker from "react-native-modal-datetime-picker";
@@ -37,7 +35,11 @@ class Search extends Component {
     return (
       <View>
         <Header navigation={navigation} />
-
+        <View style={styles.introContainer}>
+          <Text style={styles.introText}>
+            Find news articles from now and then, all in one place.
+          </Text>
+        </View>
         <View style={styles.fieldContainer}>
           <TextInput
             style={styles.text}
@@ -131,19 +133,37 @@ class Search extends Component {
     if (q === "") {
       this.setState(() => ({ qError: "Please enter a search query." }));
     } else {
-      this.setState({ q: "", DateFrom: null, DateTo: null, qError: false });
+      this.setState({
+        q: "",
+        DateFrom: null,
+        DateTo: null,
+        qError: false,
+        showHelp: false
+      });
       this.props.navigation.navigate("NewsList", { q, DateFrom, DateTo });
     }
   };
 }
 
 const styles = StyleSheet.create({
+  introContainer: {
+    alignItems: "center",
+    marginLeft: 18,
+    marginRight: 18,
+    marginTop: 10,
+    justifyContent: "center"
+  },
+  introText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#F15025"
+  },
   infoContainer: {
     alignItems: "center",
     margin: 15
   },
   infoText: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "bold",
     color: "#F15025"
   },
@@ -156,7 +176,6 @@ const styles = StyleSheet.create({
   },
   text: {
     height: 50,
-    // borderWidth: 1,
     margin: 0,
     marginLeft: 7,
     marginRight: 7,

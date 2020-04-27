@@ -1,19 +1,22 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
-import {Linking} from 'expo'; 
+import { Linking } from "expo";
 import { formatDateFull } from "./utils";
 
-//article is passed on props
 const NewsCard = ({ article }) => {
   return (
     <View style={styles.cardContainer}>
       <Text style={styles.titleText}>{article.webTitle}</Text>
-      <Text>{article.sectionName} • {formatDateFull(article.webPublicationDate)}</Text>
+      <Text>
+        {article.sectionName} • {formatDateFull(article.webPublicationDate)}
+      </Text>
       <TouchableHighlight
-            onPress={() => {Linking.openURL(article.webUrl)}}
-            style={styles.button}>
-            <Text style={styles.buttonText}>View full article</Text>
-          </TouchableHighlight>
+        onPress={() => {
+          Linking.openURL(article.webUrl);
+        }}
+        style={styles.button}>
+        <Text style={styles.buttonText}>View full article</Text>
+      </TouchableHighlight>
     </View>
   );
 };
@@ -37,7 +40,6 @@ const styles = StyleSheet.create({
     height: 30,
     backgroundColor: "#F15025",
     borderColor: "#F15025",
-    //alignSelf: "stretch",
     width: 300,
     margin: 10,
     justifyContent: "center",
