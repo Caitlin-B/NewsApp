@@ -14,11 +14,12 @@ import { formatDate } from "./utils";
 
 class Search extends Component {
   state = {
-    q: null,
-    DateFrom: "",
-    DateTo: "",
+    q: "",
+    DateFrom: null,
+    DateTo: null,
     showDateFromPicker: false,
-    showDateToPicker: false
+    showDateToPicker: false,
+    qError: false
   };
 
   render() {
@@ -41,10 +42,13 @@ class Search extends Component {
             value={q}
             onChangeText={input => this.handleInput(input, "q")}
           />
+          {!!this.state.qError && (
+          <Text style={{ color: "red", marginLeft: 20 }}>{this.state.qError}</Text>
+        )}
           <TextInput
             style={[styles.text, styles.borderTop]}
             placeholder="From date"
-            value={formatDate(DateFrom.toString())}
+            value={DateFrom && formatDate(DateFrom.toString())}
             editable={!showDateFromPicker}
             onFocus={() => {
               this.handleDatePress("DateFrom");
@@ -59,7 +63,7 @@ class Search extends Component {
           <TextInput
             style={[styles.text, styles.borderTop]}
             placeholder="To date"
-            value={formatDate(DateTo.toString())}
+            value={DateTo && formatDate(DateTo.toString())}
             editable={!showDateToPicker}
             onFocus={() => {
               this.handleDatePress("DateTo");
@@ -103,8 +107,14 @@ class Search extends Component {
 
   handleSearchPress = () => {
     const { q, DateFrom, DateTo } = this.state;
-    this.setState({ q: "", DateFrom: "", DateTo: "" });
-    this.props.navigation.navigate("NewsList", { q, DateFrom, DateTo });
+
+    if (q === "") {
+      this.setState(() => ({ qError: "Please enter a search query." }));
+    } else {
+      this.setState({ q: "", DateFrom: null, DateTo: null, qError: false });
+      this.props.navigation.navigate("NewsList", { q, DateFrom, DateTo });
+    }
+
   };
 }
 

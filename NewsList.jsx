@@ -26,9 +26,13 @@ class NewsList extends Component {
     return (
       <View style={styles.container}>
         <Header navigation={navigation} />
+
         {status === "loading" ? (
           <Text>loading...</Text>
+        ) : results.length === 0 ? (
+          <Text>No results found</Text>
         ) : (
+          
           <FlatList
             data={results}
             renderItem={({ item }) => <NewsCard article={item} />}
@@ -96,7 +100,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
   },
   button: {
     height: 50,
